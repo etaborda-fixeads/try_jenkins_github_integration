@@ -22,6 +22,7 @@ try {
             echo 'Source Control - What is in the folder?'
             sh 'pwd'
             sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
+            checkout scm
         }
     }
     node('oracle_jdk8') {
