@@ -1,0 +1,6 @@
+stage('GithubTrigger') {
+    node('oracle_jdk8'){
+        echo 'The github sources is not merging with base'
+    }
+}
+
