@@ -2,7 +2,7 @@ try {
     stage('Preparation') {
         parallel (
             "Verify Node 1": {
-                node('oracle_jdk8'){
+                node {
                     echo 'Verify Node 1 - What is in the folder?'
                     sh 'ls -al'
                     sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
@@ -17,7 +17,7 @@ try {
             }
         )
     }
-    node('oracle_jdk8') {
+    node {
         stage('Source Control') {
             echo 'Source Control - What is in the folder?'
             sh 'ls -al'
