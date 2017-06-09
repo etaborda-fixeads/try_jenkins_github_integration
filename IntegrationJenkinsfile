@@ -43,6 +43,12 @@ try {
             echo 'Build - What is in the folder?'
             sh 'pwd'
             sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
+            sh 'git status'
+            sh 'git diff'
+            sh 'git branch'
+            sh 'git ls-files'
+            sh 'git diff --cached'
+            sh 'export'
             sh 'cat adeus.txt'
         }
         stage('Test') {
