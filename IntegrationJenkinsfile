@@ -44,6 +44,7 @@ try {
             sh 'pwd'
             sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
             sh 'ls -al'
+            input "Does the user acceptance test pass? Can we proceed to deploy?"
             sh 'git status'
             sh 'git diff'
             sh 'git branch'
