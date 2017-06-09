@@ -17,14 +17,14 @@ try {
             }
         )
     }
-    node('oracle_jdk8') {
-        stage('Source Control') {
+    stage('Source Control') {
+        node {
             echo 'Source Control - What is in the folder?'
             sh 'ls -al'
             sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
-            checkout scm
-            sh 'ls -al'
         }
+    }
+    node('oracle_jdk8') {
         stage('Code Analysis') {
             parallel (
                     "Code Style Analysis": {
@@ -43,37 +43,35 @@ try {
             echo 'Build - What is in the folder?'
             sh 'ls -al'
             sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
-            sh 'cat adeus.txt'
         }
         stage('Test') {
             parallel (
-                    "Unit Test": {
-                        echo 'Unit Test - What is in the folder?'
-                        sh 'ls -al'
-                        sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
-                    },
                     "Integration Test": {
                         echo 'Integration Test - What is in the folder?'
                         sh 'ls -al'
                         sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
+                    },
+                    "Smoke Test": {
+                        echo 'Smoke Test - What is in the folder?'
+                        sh 'ls -al'
+                        sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
+                    },
+                    "End To End Test": {
+                        echo 'End To End Test - What is in the folder?'
+                        sh 'ls -al'
+                        sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
+                    },
+                    "User Acceptance": {
+                        input "Does the user acceptance test pass? Can we proceed to deploy?"
                     }
             )
         }
     }
-    stage('Integration Feedback') {
+    stage('Deploy') {
         node {
-            parallel (
-                    "Slack Feedback": {
-                        echo 'Slack Feedback - What is in the folder?'
-                        sh 'ls -al'
-                        sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
-                    },
-                    "SCM Feedback": {
-                        echo 'SCM Feedback - What is in the folder?'
-                        sh 'ls -al'
-                        sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
-                    }
-            )
+            echo 'Deploy - What is in the folder?'
+            sh 'ls -al'
+            sh 'echo "name: $NODE_NAME lables: $NODE_LABELS"'
         }
     }
 } catch (exception) {
